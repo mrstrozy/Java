@@ -1,0 +1,121 @@
+***********************************************************
+**
+**   Assignment 1 by: Matthew Strozyk
+**
+**   Class: CSE-305
+**
+**   Date: February 8th, 2015
+**
+***********************************************************
+
+Problem 1:
+
+   a.
+      i. No
+      ii. Yes
+      iii. No
+      iv. No
+
+   b. 10 20 * 30 40 * +
+   
+      Parse Tree:
+                         exp exp +
+                        /     \
+                 exp exp *    exp exp *
+                /    /         \   \
+              int   int        int  int
+              /     /           \    \
+             10    20           30    40
+      
+--------------------------------------------
+Problem 2:
+
+   Grammar:
+      
+      S -> switch
+ switch -> '(' aexp ')' {cond}+ finish
+   cond -> {num ','}+ ':' stmt
+ finish -> end | 'else' stmt 'end'
+
+--------------------------------------------
+Problem 3:
+
+   a. Consider the statement !true && false
+
+      parse tree 1:
+                        bexp2
+                         |
+                        bterm
+                         |
+                        bfact
+                        /  \
+                      '!'   bexp2
+                             |
+                            bterm
+                           /  |  \
+                       bfact '&&' bterm
+                       |              |
+                      true           bfact
+                                      |
+                                     false
+      parse tree 2:
+                       bexp2
+                        |
+                       bterm
+                     /  |  \
+                 bfact '&&' bterm
+                /  |             |
+              '!' bexp2        bfact
+                   |             |
+                bterm          false
+                   |
+                bfact
+                   |
+                true
+                        
+      Conclusion: Since the language has
+         two parse trees for the string
+         !true && false, this language 
+         is ambiguous.
+
+   b. BEXP3:  !true || false || true
+
+      bexp -> bterm | '!' bexp | bterm '||' bexp
+      bterm -> bfact | bfact '&&' bterm
+      bfact -> true | false | id | '(' bexp')' 
+
+
+   c. BEXP_Extension
+      
+      program -> aexp relop aexp | aexp
+      relop -> '==' | '<=' | '>=' | '<' | '>'
+      aexp -> aterm | aterm '||' aexp
+      aterm -> afact | afact '&&' aterm
+      afact -> true | false | id | '(' aexp ')'
+      
+
+
+4.
+
+   a. There are too many different "contexts"( such as
+      author, date, year, month, etc.) that have 
+      to be defined with XML-like elements. Thus there 
+      cannot be a "general" context-free grammar
+      definied.
+
+   b. stmt -> tag | str_t
+      tag -> {begin_id-name_1 stmt  end_id-name_2}+
+      begin_id-name -> '<' id_name '>'
+      end_id-name -> '</' id_name '>'
+      str_t -> string | num
+
+      Syntax:                                      Semantics:
+      
+      tag -> begin_id-name stmt  end_id-name_2     id-name_1 == id-name_2  
+      
+      str_t -> num         ----------------------  t = int
+      str_t -> string      ----------------------  t = string
+
+//End of Homework 1
+
+
